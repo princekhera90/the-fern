@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './login'
+import Dashboard from './dashboard';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" component={Login}/>
         
         <Route path="/register" component={Register}/>
+        <Route path="/dashboard" component={Dashboard}/>
       </React.Fragment>
   </Router>)
 }
