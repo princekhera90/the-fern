@@ -11,13 +11,15 @@ function App() {
         <div className="App">
           <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">The Fern</a>
-            <a class="nav-link" href="#">Login</a>
-            <a class="nav-link" href="#">Dashboard</a>
-            <a class="nav-link" href="#">Profile</a>
+            <a class="nav-link" href="/dashbord">Dashboard</a>
+            <a class="nav-link" href="/profile">Profile</a>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Sign Up</a>
           </nav>
         </div>
 
         <Route path="/login" component={Login}/>
+        
         <Route path="/register" component={Register}/>
       </React.Fragment>
   </Router>)

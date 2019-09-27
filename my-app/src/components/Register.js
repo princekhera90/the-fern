@@ -72,7 +72,7 @@ class Register extends React.Component {
                         <form class="container" onSubmit={this.handelSubmit}>
                             <div class="form-group">
                                 <label id="useremail">User Email :</label>
-                                <input type="text" onChange={this.handelChange} value={this.state.UserEmail} id="user" className="form-control" placeholder="abc@gmail.com" />
+                                <input type="text" onChange={this.handelChange} value={this.state.UserEmail} id="useremail" className="form-control" placeholder="abc@gmail.com" />
                             </div>
 
                             <div class="form-group">
@@ -116,7 +116,7 @@ class Register extends React.Component {
                             </div>
 
                             <div class="form-group col-md-2 offset-md-5">
-                                <button class="btn btn-primary">Sign Up</button>
+                                <button class="btn btn-success">Sign Up</button>
                             </div>
 
                         </form>
