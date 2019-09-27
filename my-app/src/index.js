@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Login from './login'
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Register from './components/Register';
