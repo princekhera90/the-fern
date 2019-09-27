@@ -1,13 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Login from './login'
+import {BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">The Fern</a>
+      <a class="nav-link" href="#">Login</a>
+      <a class="nav-link" href="#">Dashboard</a>
+      <a class="nav-link" href="#">Profile</a>
       </nav>
+      <Login></Login>
     </div>
   );
 }
