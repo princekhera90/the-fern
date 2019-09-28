@@ -56,7 +56,7 @@ class GetAdsForm extends React.Component{
     selectImages = (event) => {
         let images = [];
         for(var i = 0; i < event.target.files.length; i++){
-        images[i] = URL.createObjectURL(event.target.files.item(i));
+        images[i] = URL.createObjectURL(event.target.files.item(i)).toString();
         console.log("image"+images[i]);
         }
        // images = images.filter(image => image.match(/\.(jpg|jpeg|png|gif)$/))
@@ -95,16 +95,17 @@ class GetAdsForm extends React.Component{
         data.append('pname',this.state.productName);
         data.append('category',this.state.category);
         data.append('location',this.state.location);
-        this.state.images.forEach(image=>{
-            data.append('images',image);
-        });
+        data.append('images','jgsdfasjv');
         postBody.append('email','samsaran9524@gmail.com');
         postBody.append('product',data);
+        console.log("sad");
         axios.post('http://192.168.43.207:8200/addProduct',postBody,{
             headers:{
-                "Content-Type": "multipart/form-data"
-            }}).then(res=>{
-            console.log(JSON.stringify(res));
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin':'*'
+            }
+        }).then(res=>{
+            console.log("res from server"+JSON.stringify(res));
         }).catch(err=>{
             console.log(err);
         });
@@ -113,9 +114,9 @@ class GetAdsForm extends React.Component{
     render(){
         return(
             <div className="container-fluid">
-            <div class="text-center"><h2>Upload your Products... </h2></div>
+            <div className="text-center"><h2>Upload your Products... </h2></div>
             <div className="row col-md-4  offset-4 pt-4">
-            <form encType="multipart/form-data" className="bg-transparent" onSubmit={this.handleSubmit}>
+            <form className="bg-transparent" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="productName" className="text-primary pl-2 font-weight-bold form-inline">Product Name </label>
                     <input type="text" placeholder="eg: Reymond cloths" id="productName" className="form-control" value={this.state.adName} onChange={this.validateName}/>

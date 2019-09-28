@@ -64,11 +64,11 @@ class Login extends React.Component{
     }
 
     render() {return (<React-Fragement>
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card" style={{top : 70}}>
-                    <h3 class="text-center text-primary">Login</h3><br></br>
-                    <form class="container">
+        <div className="row">
+            <div className="col-md-6 offset-md-3">
+                <div className="card" style={{top : 70}}>
+                    <h3 className="text-center text-primary">Login</h3><br></br>
+                    <form className="container">
                     <div className="form-group">
                         <label>Email Id:</label>
                         <input className="form-control" onChange={this.validateId} value={this.state.id} />
@@ -79,7 +79,7 @@ class Login extends React.Component{
                         <input className="form-control" type="password" onChange={this.validatePassword} value={this.state.password} />
                     </div>
                     <span className="text-danger">{this.state.formErrors.passwordErr}</span><br/>
-                    <div class="form-group col-md-2 offset-md-5">
+                    <div className="form-group col-md-2 offset-md-5">
                         <button type="button" onClick={this.update} className="btn btn-success" disabled={!this.state.formValid}>Login</button><br/>
                         <span className="text-success">{this.state.successMessage}</span>
                     </div>
