@@ -28,7 +28,7 @@ class GetAdsForm extends React.Component{
         };
     }
     category=['food','clothes','furnitures'];
-    location=['hyderaad','pune','mysuru','banglore'];
+    location=['hyderabad','pune','mysuru','banglore'];
 
     categoryHandler=(event)=>{
         let category=event.target.value;
@@ -56,17 +56,17 @@ class GetAdsForm extends React.Component{
     selectImages = (event) => {
         let images = [];
         for(var i = 0; i < event.target.files.length; i++){
-        images[i] = event.target.files.item(i);
-        console.log("image"+images[i].name);
+        images[i] = URL.createObjectURL(event.target.files.item(i));
+        console.log("image"+images[i]);
         }
-        images = images.filter(image => image.name.match(/\.(jpg|jpeg|png|gif)$/))
+       // images = images.filter(image => image.match(/\.(jpg|jpeg|png|gif)$/))
         let noOfImagesChoosen = `${images.length} valid image(s) selected`
         console.log('state info :'+JSON.stringify(this.state));
         let stateObj=this.state;
         stateObj.images=images;
         stateObj.noOfImagesChoosen=noOfImagesChoosen;
         stateObj.formValidity['images']=(images.length>0)?true:false;
-        stateObj.errorMessages['images']=(stateObj.formValidity['images'])?'':'choose atleat 1 file';
+        stateObj.errorMessages['images']=(stateObj.formValidity['images'])?'':'choose atleast 1 file';
         stateObj.isValidForm=stateObj.formValidity.category && stateObj.formValidity.location && stateObj.formValidity.productName
         && stateObj.formValidity.images;
         this.setState(stateObj);
@@ -92,15 +92,18 @@ class GetAdsForm extends React.Component{
     validateForm=()=>{
         let data=new FormData();
         let postBody=new FormData();
-        data.append('productName',this.state.productName);
+        data.append('pname',this.state.productName);
         data.append('category',this.state.category);
         data.append('location',this.state.location);
         this.state.images.forEach(image=>{
-            data.append('images',image,image.name);
-        })
+            data.append('images',image);
+        });
         postBody.append('email','samsaran9524@gmail.com');
         postBody.append('product',data);
-        axios.post('http://localhost:8080/upload',postBody).then(res=>{
+        axios.post('http://192.168.43.207:8200/addProduct',postBody,{
+            headers:{
+                "Content-Type": "multipart/form-data"
+            }}).then(res=>{
             console.log(JSON.stringify(res));
         }).catch(err=>{
             console.log(err);
@@ -110,9 +113,9 @@ class GetAdsForm extends React.Component{
     render(){
         return(
             <div className="container-fluid">
-            <div id="label-text"><h2>Upload your Products... </h2></div>
+            <div class="text-center"><h2>Upload your Products... </h2></div>
             <div className="row col-md-4  offset-4 pt-4">
-            <form className="bg-transparent" onSubmit={this.handleSubmit}>
+            <form encType="multipart/form-data" className="bg-transparent" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="productName" className="text-primary pl-2 font-weight-bold form-inline">Product Name </label>
                     <input type="text" placeholder="eg: Reymond cloths" id="productName" className="form-control" value={this.state.adName} onChange={this.validateName}/>
@@ -121,7 +124,12 @@ class GetAdsForm extends React.Component{
                 <div className="form-group">
                     <label htmlFor="image" className="text-primary pl-2 font-weight-bold form-inline">Chose your file</label>
                     <input className="form-control" type="file" id="image" onChange={this.selectImages} multiple/>
-                    <span className="text-danger">{(this.state.formValidity['images'])?this.state.noOfImagesChoosen:this.state.errorMessages['images']}</span>
+                    <span className={(this.state.formValidity['images'])?'text-primary':'text-danger'}>{(this.state.formValidity['images'])?this.state.noOfImagesChoosen:this.state.errorMessages['images']}</span>
+                    <span>
+                        {this.state.images.map((image,index)=>{
+                            return  <img height="100px" width="100px" src={image} key={index}/>
+                        })}
+                    </span>
                 </div>
                 <div className="form-group">
                     <label htmlFor="category" className=" text-primary pl-2 font-weight-bold form-inline"> Category </label>
