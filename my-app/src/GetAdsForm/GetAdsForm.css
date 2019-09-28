@@ -1,0 +1,12 @@
+.bg-image{
+    background: url('../assets/businessman.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+label,h2{
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+.label-text{
+    border:2px white 10px;
+}
